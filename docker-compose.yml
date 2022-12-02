@@ -6,7 +6,7 @@ services:
     image: postgres:14.2-alpine
     volumes:
       - postgresql_data:/var/lib/postgresql/test/data/
-    restart: always
+    restart: "no"
     ports:
       - 15432:5432
     environment:
@@ -20,7 +20,7 @@ services:
     image: dpage/pgadmin4
     volumes:
       - pgadmin-data:/var/lib/test/pgadmin
-    restart: always
+    restart: "no"
     ports:
       - 18002:80
     environment:
@@ -35,9 +35,10 @@ services:
       - "18080:8080"
     depends_on:
       - "postgres"
-    restart: always
+    restart: "no"
     environment:
       ## postgres database to store Hasura metadata
+      ## 需要填远程(容器里)的数据库端口5432,而不是本地映射的15432
       HASURA_GRAPHQL_METADATA_DATABASE_URL: postgres://postgres:admin@postgres:5432/weather
       ## this env var can be used to add the above postgres database to Hasura as a data source. this can be removed/updated based on your needs
       PG_DATABASE_URL: postgres://postgres:admin@postgres:5432/weather

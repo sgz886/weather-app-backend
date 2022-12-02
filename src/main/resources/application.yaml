@@ -1,0 +1,30 @@
+# 这是设置url上的路径
+server:
+  servlet:
+    context-path: /api
+
+# 这是swagger的path的设置
+springdoc:
+  api-docs:
+    path: /api-docs
+
+# 锤姐代码
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:15432/postgres?currentSchema=weather
+    username: postgres
+    password: admin
+  flyway:
+    enabled: true
+    schemas: weather
+  jpa:
+    properties:
+      hibernate:
+        default_schema: weather
+        jdbc:
+          time_zone: UTC
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
